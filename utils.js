@@ -1,7 +1,7 @@
 const Airtable = require("airtable");
-require("dotenv").config();
-const airtable_key = process.env.AIRTABLE_KEY;
-const base_id = process.env.BASE_ID;
+const config = require('./config.json')
+const airtable_key = config.AIRTABLE_KEY;
+const base_id = config.BASE_ID;
 const base = new Airtable({
 	apiKey: airtable_key,
 }).base(base_id);
@@ -384,33 +384,6 @@ const getRules = async (rulesId) => {
 	};
 };
 
-const isPatron = async (client, guildID) => {
-	const guild = await client.guilds.fetch(guildID);
-
-	let isTrue = false;
-	await base("Patreon")
-		.select({ maxRecords: 1000, view: "Grid view" })
-		.all()
-		.then(async (records) => {
-			for (let record of records) {
-				const id = await record.get("Discord User ID");
-				const user = await guild.members.fetch(id).catch((e) => {
-					//Do nothing
-				});
-
-				if (user && user.hasPermission("ADMINISTRATOR")) {
-					isTrue = true;
-					break;
-				}
-			}
-		})
-		.catch((e) => {
-			console.error(e);
-		});
-
-	return isTrue;
-};
-
 //Pokemon-related Constants
 const recoilMoves = [
 	"bravebird",
@@ -714,7 +687,6 @@ const util = {
 	findLeagueId,
 	findRulesId,
 	getRules,
-	isPatron,
 	recoilMoves,
 	confusionMoves,
 	toxicMoves,

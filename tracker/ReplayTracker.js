@@ -102,7 +102,7 @@ class ReplayTracker {
 				//Increments the total number of turns at the beginning of every new turn
 				else if (line.startsWith(`|turn|`)) {
 					battle.turns++;
-					console.log(battle.turns);
+					//console.log(battle.turns);
 
 					dataArr.splice(dataArr.length - 1, 1);
 				}
@@ -164,13 +164,13 @@ class ReplayTracker {
 						battle[side].realName
 					] = battle[side];
 
-					console.log(
-						`${this.battleLink}: ${
-							oldPokemon.realName || oldPokemon.name
-						} has been switched into ${
-							battle[side].realName || battle[side].name
-						}`
-					);
+					//console.log(
+				//		`${this.battleLink}: ${
+				//			oldPokemon.realName || oldPokemon.name
+				//		} has been switched into ${
+				//			battle[side].realName || battle[side].name
+				//		}`
+				//	);
 				}
 
 				//Ally Switch and stuff
@@ -182,15 +182,15 @@ class ReplayTracker {
 					battle[`${userSide}a`] = battle[`${userSide}b`];
 					battle[`${userSide}b`] = temp;
 
-					console.log(
-						`${this.battleLink}: ${
-							battle[`${userSide}a`].realName ||
-							battle[`${userSide}a`].name
-						} has swapped with ${
-							battle[`${userSide}b`].realName ||
-							battle[`${userSide}b`].name
-						} due to ${parts[3].split(": ")[1]}`
-					);
+				//	console.log(
+				//		`${this.battleLink}: ${
+				//			battle[`${userSide}a`].realName ||
+				//			battle[`${userSide}a`].name
+				//		} has swapped with ${
+				//			battle[`${userSide}b`].realName ||
+				//			battle[`${userSide}b`].name
+				//		} due to ${parts[3].split(": ")[1]}`
+				//	);
 				}
 
 				//If Zoroark replaces the pokemon due to Illusion
@@ -210,13 +210,13 @@ class ReplayTracker {
 					battle[side].currentDirectKills += tempCurrentDirectKills;
 					battle[side].currentPassiveKills += tempCurrentPassiveKills;
 
-					console.log(
-						`${this.battleLink}: ${
-							oldPokemon.realName || oldPokemon.name
-						} has been replaced by ${
-							battle[side].realName || battle[side].name
-						}`
-					);
+				//	console.log(
+				//		`${this.battleLink}: ${
+				//			oldPokemon.realName || oldPokemon.name
+				//		} has been replaced by ${
+				//			battle[side].realName || battle[side].name
+				//		}`
+				//	);
 
 					dataArr.splice(dataArr.length - 1, 1);
 				}
@@ -266,7 +266,7 @@ class ReplayTracker {
 					let move = parts[2];
 					let victimSide = parts[1].split(": ")[0];
 					let prevMoveLine = dataArr[dataArr.length - 2];
-					console.log(prevMoveLine);
+			//		console.log(prevMoveLine);
 					let prevMoveUserSide = prevMoveLine
 						.split("|")
 						.slice(1)[1]
@@ -307,9 +307,9 @@ class ReplayTracker {
 							inflictor =
 								battle[side].realName || battle[side].name;
 						}
-						console.log(
-							`${this.battleLink}: ${inflictor} caused ${weather}.`
-						);
+			//			console.log(
+			//				`${this.battleLink}: ${inflictor} caused ${weather}.`
+			//			);
 						battle.setWeather(weather, inflictor);
 					}
 
@@ -358,7 +358,7 @@ class ReplayTracker {
 				//Checks for certain specific moves: hazards only for now
 				else if (line.startsWith(`|move|`)) {
 					let move = parts[2];
-					console.log(`${this.battleLink}: ${line}`);
+			//		console.log(`${this.battleLink}: ${line}`);
 
 					if (line.includes("[miss]")) {
 						//If a mon missed
@@ -494,9 +494,9 @@ class ReplayTracker {
 							"Passive"
 						);
 					}
-					console.log(
-						`${this.battleLink}: ${inflictor} caused ${parts[2]} on ${victim}.`
-					);
+			//		console.log(
+			//			`${this.battleLink}: ${inflictor} caused ${parts[2]} on ${victim}.`
+			//		);
 					battle.history.push(
 						`${inflictor} caused ${parts[2]} on ${victim} (Turn ${battle.turns}).`
 					);
@@ -579,7 +579,7 @@ class ReplayTracker {
 						let side = parts[1].split(": ")[0];
 
 						if (move === "Future Sight" || move === "Doom Desire") {
-							console.log("yo");
+				//			console.log("yo");
 							battle.hazardsSet[
 								afflictorSide.substring(0, 2).includes("1")
 									? afflictorSide
@@ -597,9 +597,9 @@ class ReplayTracker {
 							afflictor = battle[afflictorSide].name;
 							battle[side].otherAffliction[move] = afflictor;
 
-							console.log(
-								`${this.battleLink}: Started ${move} on ${victim} by ${afflictor}`
-							);
+				//			console.log(
+				//				`${this.battleLink}: Started ${move} on ${victim} by ${afflictor}`
+				//			);
 						}
 					} else if (affliction === `Substitute`) {
 						let side = parts[1].split(": ")[0];
@@ -645,9 +645,9 @@ class ReplayTracker {
 							}
 						}
 
-						console.log(
-							`${this.battleLink}: ${victim} was killed by ${killer} due to Perish Song (passive) (Turn ${battle.turns})`
-						);
+				//		console.log(
+				//			`${this.battleLink}: ${victim} was killed by ${killer} due to Perish Song (passive) (Turn ${battle.turns})`
+				//		);
 						battle.history.push(
 							`${victim} was killed by ${killer} due to Perish Song (passive) (Turn ${battle.turns})`
 						);
@@ -1368,7 +1368,7 @@ class ReplayTracker {
 											victimSide === "p2a")) &&
 									!battle.p2a.isDead
 								) {
-									console.log(prevMoveUserSide);
+					//				console.log(prevMoveUserSide);
 									killer =
 										battle[prevMoveUserSide].realName ||
 										battle[prevMoveUserSide].name;
@@ -1406,9 +1406,9 @@ class ReplayTracker {
 							}
 						}
 						if (victim && reason) {
-							console.log(
-								`${this.battleLink}: ${victim} was killed by ${killer} due to ${reason}.`
-							);
+				//			console.log(
+				//				`${this.battleLink}: ${victim} was killed by ${killer} due to ${reason}.`
+				//			);
 							battle.history.push(
 								`${victim} was killed by ${killer} due to ${reason}.`
 							);
@@ -1449,9 +1449,9 @@ class ReplayTracker {
 							battle.p1Pokemon[killer].killed(deathJson);
 						}
 
-						console.log(
-							`${this.battleLink}: ${victim} was killed by ${killer} due to Destiny Bond (Turn ${battle.turns}).`
-						);
+				//		console.log(
+				//			`${this.battleLink}: ${victim} was killed by ${killer} due to Destiny Bond (Turn ${battle.turns}).`
+				//		);
 						battle.history.push(
 							`${victim} was killed by ${killer} due to Destiny Bond (Turn ${battle.turns}).`
 						);
@@ -1500,15 +1500,15 @@ class ReplayTracker {
 								}
 							}
 
-							console.log(
-								`${this.battleLink}: ${victim} was killed by ${
-									killer || "suicide"
-								} due to ${prevMove} (${
-									this.rules.suicide === "Passive"
-										? "passive"
-										: "direct"
-								}) (Turn ${battle.turns}).`
-							);
+					//		console.log(
+					//			`${this.battleLink}: ${victim} was killed by ${
+					//				killer || "suicide"
+					//			} due to ${prevMove} (${
+					//				this.rules.suicide === "Passive"
+					//					? "passive"
+					//					: "direct"
+					//			}) (Turn ${battle.turns}).`
+					//		);
 							battle.history.push(
 								`${victim} was killed by ${
 									killer || "suicide"
@@ -1545,9 +1545,9 @@ class ReplayTracker {
 						}
 
 						if (killer && victim) {
-							console.log(
-								`${this.battleLink}: ${victim} was killed by ${killer} (Turn ${battle.turns}).`
-							);
+					//		console.log(
+					//			`${this.battleLink}: ${victim} was killed by ${killer} (Turn ${battle.turns}).`
+					//		);
 							battle.history.push(
 								`${victim} was killed by ${killer} (Turn ${battle.turns}).`
 							);
@@ -1684,14 +1684,14 @@ class ReplayTracker {
 						}
 					}
 
-					console.log(`${battle.winner} won!`);
+					//console.log(`${battle.winner} won!`);
 
 					let info = {
 						replay: this.link,
 						turns: battle.turns,
 						winner: battle.winner,
 						loser: battle.loser,
-						history: `https://server.porygonbot.xyz/kills/${this.battleLink}`,
+						//history: `https://server.porygonbot.xyz/kills/${this.battleLink}`,
 						spoiler: this.rules.spoiler,
 						format: this.rules.format,
 						tb: this.rules.tb,
@@ -1754,7 +1754,7 @@ class ReplayTracker {
 							? ["Nothing happened"]
 							: battle.history;
 
-					await axios
+				/*	await axios
 						.post(
 							`https://server.porygonbot.xyz/kills/${this.battleLink}`,
 							battle.history.join("<br>"),
@@ -1776,7 +1776,7 @@ class ReplayTracker {
 							);
 
 							console.error(e);
-						});
+						}); */
 
 					if (
 						battle.winner.endsWith("p1") &&
